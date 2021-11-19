@@ -1,0 +1,203 @@
+Customer
+
+create table customer(
+cus_id number NOT NULL,
+cus_name varchar2(50) NOT NULL,
+cus_phn_no varchar2(50) NOT NULL,
+cus_username varchar2(50) NOT NULL,
+cus_password varchar2(50) NOT NULL,
+cus_email varchar2(50) NOT NULL,
+primary key (cus_id),
+unique (cus_phn_no),
+unique (cus_username)
+);
+
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(1,'Poorna Chandra Prakash','9342027060','poorna','poorna','poornachandraprakash084@gmail.com');
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(2,'B M Uday Prakash','7411013756','uday','uday','udayp43343@gmail.com');
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(3,'Narendra','9573523886','narendra','narendra','virrurunarendra2000@gmail.com');
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(4,'Abinaya','9080838019','abinaya','abinaya','vgrabi004@gmail.com');
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(5,'Shanmugavel','8870241710','shanmugavel','shanmugavel','sshanmu7@gmail.com');
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(6,'Pavithra','7026274735','pavithra','pavithra','pavithrabankar@gmail.com');
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(7,'Sangram','9527521085','sangram','sangram','sangram1kumbhar@gmail.com');
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(8,'Sumanthran Suresh','8778156977','sumanthran','sumanthran','sumansuresh1711@gmail.com');
+insert into customer(cus_id,cus_name,cus_phn_no,cus_username,cus_password,cus_email) values(9,'Krithik','8248879413','krithik','krithik','krithiksakthi1998@gmail.com');
+
+--------------------------------------------------------------------------------
+Menu
+
+create table menu(
+men_id number NOT NULL,
+men_item varchar2(50) default NULL,
+men_price number(9,2) default NULL,
+men_calories number(9,2) NOT NULL,
+men_speciality varchar2(50) NOT NULL,
+primary key (men_id)
+);
+
+insert into menu values (1,'CHIKEN BIRIYANI',850.12,750.00,'NON-VEG');
+insert into menu values (2, 'CHIKEN KEBAB',900.00,500,'NON-VEG');
+insert into menu values(3, 'GOBI MANCHURIYAN',600.00,600,'VEG');
+insert into menu values(4, 'VEG BIRIYANI',850.00,550,'VEG');
+insert into menu values(5, 'CHIKEN SANDWICH',950.00,600,'NON-VEG');
+insert into menu values(6, 'PANEER MAKHANI BIRIYANI',900.00,750,'VEG');
+insert into menu values(7, 'STUFFED MASALA MUSHROOMS',850.00,550,'VEG');
+insert into menu values(8, 'GOBHI ALOO',700.00,600,'VEG');
+insert into menu values(9, 'CHIKEN 65',550.00,770,'NON-VEG');
+insert into menu values(10, 'PALAK PANEER',750.00,500,'VEG');
+
+--------------------------------------------------------------------------------
+Wallet
+drop table wallet;
+create table Wallet
+(
+cus_id number references customer(cus_id),
+wal_id number  not null primary key,
+wal_amount number(9,2) not null,
+wal_source VARCHAR2(50) default 'DEBIT_CARD',
+constraint chk_wallet_wal_source check(wal_source in('PAYTM','CREDIT_CARD','DEBIT_CARD')),
+constraint pk_Wallet unique(cus_id,wal_source)
+);
+
+INSERT INTO Wallet VALUES (1,1,4215,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (1,10,4215,'CREDIT_CARD');
+INSERT INTO Wallet VALUES (1,11,4215,'PAYTM');
+
+INSERT INTO Wallet VALUES (2,2,3000,'PAYTM');
+INSERT INTO Wallet VALUES (2,12,3000,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (2,20,3000,'CREDIT_CARD');
+
+INSERT INTO Wallet VALUES (3,3,485.23,'CREDIT_CARD');
+INSERT INTO Wallet VALUES (3,13,485.23,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (3,21,485.23,'PAYTM');
+
+INSERT INTO Wallet VALUES (4,4,5000,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (4,14,5000,'CREDIT_CARD');
+INSERT INTO Wallet VALUES (4,22,5000,'PAYTM');
+
+INSERT INTO Wallet VALUES (5,5,4500.36,'CREDIT_CARD');
+INSERT INTO Wallet VALUES (5,15,4500.36,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (5,23,4500.36,'PAYTM');
+
+INSERT INTO Wallet VALUES (6,6,4560,'PAYTM');
+INSERT INTO Wallet VALUES (6,16,4560,'CREDIT_CARD');
+INSERT INTO Wallet VALUES (6,24,4560,'DEBIT_CARD');
+
+INSERT INTO Wallet VALUES (7,7,4000,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (7,17,4000,'PAYTM');
+INSERT INTO Wallet VALUES (7,25,4000,'CREDIT_CARD');
+
+INSERT INTO Wallet VALUES (8,8,55.55,'CREDIT_CARD');
+INSERT INTO Wallet VALUES (8,18,55.55,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (8,26,55.55,'PAYTM');
+
+INSERT INTO Wallet VALUES (9,9,4566,'PAYTM');
+INSERT INTO Wallet VALUES (9,19,4566,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (9,27,4566,'CREDIT_CARD');
+
+INSERT INTO Wallet VALUES (10,28,1000000,'PAYTM');
+INSERT INTO Wallet VALUES (10,29,1000000,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (10,30,1000000,'CREDIT_CARD');
+
+INSERT INTO Wallet VALUES (11,31,1000000,'PAYTM');
+INSERT INTO Wallet VALUES (11,32,1000000,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (11,33,1000000,'CREDIT_CARD');
+
+INSERT INTO Wallet VALUES (12,34,1000000,'PAYTM');
+INSERT INTO Wallet VALUES (12,35,1000000,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (12,36,1000000,'CREDIT_CARD');
+
+INSERT INTO Wallet VALUES (13,37,1000000,'PAYTM');
+INSERT INTO Wallet VALUES (13,38,1000000,'DEBIT_CARD');
+INSERT INTO Wallet VALUES (13,39,1000000,'CREDIT_CARD');
+---------------------------------------------------------------------------
+VENDOR TABLE:
+drop table vendor;
+CREATE TABLE VENDOR (
+  ven_id NUMBER PRIMARY KEY,
+  ven_name VARCHAR2(50) NOT NULL,
+  ven_phn_no VARCHAR2(15) NOT NULL UNIQUE,
+  ven_username VARCHAR2(25) NOT NULL UNIQUE,
+  ven_password VARCHAR2(25) NOT NULL,
+  ven_email VARCHAR2(50) NOT NULL UNIQUE
+);
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(1,'Swiggy','9874563210','SWIGGY','SWIGGY@123','SWIGGY@GMAIL.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(2,'Zomato','9836786210','ZOMATO','ZOMATO@123','ZOMATO@YAHOO.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(3,'Uber Eats','9874563753','UBER_EATS','UBER_EATS@123','UBEREATS@OUTLOOK.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(4,'Dominos','9874563942','DOMINOS','DOMINOS@123','DOMINOS@GMAIL.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(5,'Mc Donalds','9874515810','MC_DONALDS','MC_DONALDS@123','MCDONALDS@YAHOO.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(6,'Pizza Hut','9855663210','PIZZA_HUT','PIZZA_HUT@123','PIZZAHUT@OUTLOOK.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(7,'KFC','9877542210','KFC','KFC@123','KENTUCKYFC@GMAIL.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(8,'Food Panda','9874591410','FOOD_PANDA','FOOD_PANDA@123','FOOD_PANDA@GMAIL.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(9,'Just Eat','8884563210','JUST_EAT','JUST_EAT@123','JUST_EAT@YAHOO.COM');
+
+INSERT INTO VENDOR (ven_id,ven_name,ven_phn_no,ven_username,ven_password,ven_email)
+VALUES(10,'Faasos','7674563210','FAASOS','FAASOS@123','FAASOS@GMAIL.COM');
+
+--------------------------------------------------------------------------
+
+Order
+drop table orders;
+create table orders
+(
+ord_id number constraint orders_pk primary key,
+cus_id number constraint orders_cus_id references customer(cus_id),
+ven_id number constraint orders_ven_id references vendor(ven_id),
+wal_source varchar2(30) default null,
+men_id number constraint orders_men_id references menu(men_id),
+ord_date date default sysdate,
+ord_quantity number default null,
+ord_billamount number default null,
+ord_status varchar2(50) default 'PENDING'
+constraint chk_orders_ord_status check(ord_status in('ACCEPTED','PENDING','DENIED')),
+ord_comments varchar2(50) default null
+);
+
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(1,1,1,'PAYTM',1,1,850,'ACCEPTED','zero contact delivery');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(2,5,4,'CREDIT_CARD',2,2,900,'PENDING','add extra sause');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(3,3,3,'DEBIT_CARD',3,3,600,'DENIED','make it more spicy');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(4,2,7,'CREDIT_CARD',4,4,850,'ACCEPTED','dont call leave it at door');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(5,6,5,'PAYTM',4,5,950,'ACCEPTED','make it crunchy');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(6,4,6,'CREDIT_CARD',6,5,900,'DENIED','zero contact delivery');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(7,9,2,'DEBIT_CARD',7,3,850,'PENDING','add extra sause');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(8,7,9,'PAYTM',8,5,600,'ACCEPTED','make it crunchy');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(9,8,8,'DEBIT_CARD',9,3,550,'PENDING','add extra sause');
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(10,3,10,'DEBIT_CARD',4,2,600,'ACCEPTED','zero contact delivery');
+
+
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(11,1,2,'PAYTM',1,1,85,'PENDING','zero contact delivery');
+
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(12,1,1,'CREDIT_CARD',1,85,'PENDING','Make it Spicy');
+
+insert into orders(ord_id,cus_id,ven_id,wal_source,men_id,ord_quantity,ord_billamount,ord_status,ord_comments) 
+values(13,2,1,'CREDIT_CARD',1,1,85,'PENDING','Make it Spicy');
+
